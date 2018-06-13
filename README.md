@@ -4,7 +4,7 @@ Python slack robot
 
 ## Install
 
-run on your raspberry `pip install git@github.com:Markcial/magico.git`
+run on your raspberry `pip install git+http://github.com/Markcial/magico`
 
 ## Usage
 
