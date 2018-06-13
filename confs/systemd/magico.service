@@ -1,0 +1,11 @@
+[Unit]
+Description=Botijo Magico para Pepe
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=magico
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

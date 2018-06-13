@@ -2,13 +2,19 @@ import os
 from slackclient import SlackClient
 
 
+__VERSION__ = '0.0.1'
+
 AVATAR = 'https://www.bandadicefali.it/wp-content/uploads/2016/09/Magico-Gonzalez-figurina-Cadiz.png'
 # instantiate Slack client
-SLACK_CLIENT = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+SLACK_CLIENT = None
 
 
 def get_client():
-  return SLACK_CLIENT
+    if SLACK_CLIENT is None:
+        if 'SLACK_BOT_TOKEN' not in os.environ:
+            raise ValueError("Missing required 'SLACK_BOT_TOKEN'!")
+        SLACK_CLIENT = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+    return SLACK_CLIENT
 
 
 def say(channel, message):
