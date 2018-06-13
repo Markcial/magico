@@ -1,20 +1,10 @@
 # -*- coding: utf-8 -*-
+from magico.actions import say, react, get_realname
 from urllib.parse import quote_plus
 from py_expression_eval import Parser
 
 
 _parser = Parser()
-
-
-def get_realname(userid):
-  result = get_client().api_call(
-      "users.info",
-      user=userid
-  )
-  if result['ok']:
-      return result['user']['real_name']
-
-  return 'Unknown'
 
 
 def default(message, event):
