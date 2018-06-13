@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from magico import get_client, say
 from urllib.parse import quote_plus
 from py_expression_eval import Parser
 

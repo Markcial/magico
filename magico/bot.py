@@ -1,13 +1,45 @@
 # -*- coding: utf-8 -*-
 import re
 import time
-from magico import get_client, react
+import os
+from slackclient import SlackClient
 from magico.commands import mapping as command_mapping, default as default_command
 from slackclient import SlackClient
 
 
+AVATAR = 'https://www.bandadicefali.it/wp-content/uploads/2016/09/Magico-Gonzalez-figurina-Cadiz.png'
+# instantiate Slack client
 RTM_READ_DELAY = 1 # 1 second delay between reading from RTM
 COMMAND_PATTERN = r"(^M[áa]gico(\sGonz[áa]lez)?,?|M[áa]gico(\sGonz[áa]lez)?$)"
+
+
+def get_client():
+    if get_client.instance is None:
+        if 'SLACK_BOT_TOKEN' not in os.environ:
+            raise ValueError("Missing required 'SLACK_BOT_TOKEN'!")
+        get_client.instance = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+    return get_client.instance
+get_client.instance = None
+
+
+def say(channel, message):
+    # Sends the response back to the channel
+    get_client().api_call(
+        "chat.postMessage",
+        channel=channel,
+        icon_url=AVATAR,
+        username="Mágico González",
+        text=message
+    )
+
+
+def react(channel, emoji, ts=None):
+  get_client().api_call(
+      'reactions.add',
+      channel=channel,
+      name=emoji,
+      timestamp=ts
+  )
 
 
 def parse_bot_commands(slack_events):
