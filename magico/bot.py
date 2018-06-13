@@ -3,7 +3,7 @@ import re
 import time
 import os
 from slackclient import SlackClient
-from magico.actions import get_client
+from magico.actions import get_client, react
 from magico.commands import mapping as command_mapping, default as default_command
 
 
