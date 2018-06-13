@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
+import re
+import paramiko
+from os.path import expanduser
 from magico.actions import say, react, get_realname
 from urllib.parse import quote_plus
 from py_expression_eval import Parser
 
 
+_ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+_ssh = paramiko.SSHClient()
+_ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 _parser = Parser()
 
 
@@ -47,11 +53,28 @@ def calcula(message, event):
     say(event['channel'], out)
 
 
+def ninot_report(message, event):
+    try:
+        _ssh.connect(
+            '10.224.0.80',
+            username='pi',
+            key_filename='{}/.ssh/id_rsa'.format(expanduser("~"))
+        )
+        stdin, stdout, stderr = _ssh.exec_command('report')
+        text = _ansi_escape.sub('', stdout.read().decode('utf8'))
+        out = "El reporte es este:\n{}".format(text)
+    except Exception as e:
+        print(e)
+        out = "No he sido capaz de ver como esta la raspy de ninot!"
+    say(event['channel'], out)
+
+
 mapping = {
   'ayuda': ayuda,
   'saluda': saluda,
   'hola': saluda,
   'donde esta': where_is,
+  'como esta la raspberry del ninot': ninot_report,
   'tenemos': do_we_have, 
   'calcula': calcula
 }

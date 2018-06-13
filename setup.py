@@ -33,6 +33,7 @@ setup(
     install_requires=[
         'requests',
         'python-dotenv',
+        'paramiko',
         'slackclient',
         'py-expression-eval'
     ],
