@@ -18,9 +18,9 @@ def get_realname(userid):
 
 
 def default(message, event):
-    say(event['channel'], f"""Hola {get_realname(event['user'])}
+    say(event['channel'], """Hola {}
 Si no sabes como funciono prueba a pedirme ayuda: magico ayuda
-""")
+""".format(get_realname(event['user'])))
 
 
 def ayuda(message, event):
@@ -38,11 +38,11 @@ def saluda(message, event):
 
 
 def where_is(message, event):
-    say(event['channel'], f"https://www.google.es/maps/search/{quote_plus(message)}")
+    say(event['channel'], "https://www.google.es/maps/search/{}".format(quote_plus(message)))
 
 
 def do_we_have(message, event):
-    say(event['channel'], f'https://www.ulabox.com/busca?q={quote_plus(message)}')
+    say(event['channel'], 'https://www.ulabox.com/busca?q={}'.format(quote_plus(message)))
 
 
 def calcula(message, event):
