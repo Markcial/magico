@@ -26,8 +26,11 @@ Prueba a pedirme que
   * te diga donde esta algo: magico donde esta...
   * que te calcule algo: magico calcula....
   * o que te busque algo en ulabox: magico tenemos...
+  * como esta la raspy de el ninot: magico como esta la raspberry del ninot...
+
+  Si crees que hace falta algo mas : https://github.com/markcial/magico
 """)
-    
+
 
 def saluda(message, event):
     say(event['channel'], "Hola %s!!" % get_realname(event['user']))
@@ -80,6 +83,7 @@ mapping = {
   'ese pedazo': arsa,
   'donde esta': where_is,
   'como esta la raspberry del ninot': ninot_report,
+  'la raspy': ninot_report,
   'tenemos': do_we_have, 
   'calcula': calcula
 }
