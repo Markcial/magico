@@ -33,6 +33,9 @@ def saluda(message, event):
     say(event['channel'], "Hola %s!!" % get_realname(event['user']))
 
 
+def arsa(message, event):
+    react(event['channel'], 'dancer', event['ts'])
+
 def where_is(message, event):
     say(event['channel'], "https://www.google.es/maps/search/{}".format(quote_plus(message)))
 
@@ -73,6 +76,8 @@ mapping = {
   'ayuda': ayuda,
   'saluda': saluda,
   'hola': saluda,
+  'ese': arsa,
+  'ese pedazo': arsa,
   'donde esta': where_is,
   'como esta la raspberry del ninot': ninot_report,
   'tenemos': do_we_have, 
